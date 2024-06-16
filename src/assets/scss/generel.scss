@@ -1,0 +1,215 @@
+/* GENERAL */
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+  width: 4px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: rgb(121, 121, 121);
+  width: 6px;
+  border-radius: 20px;
+}
+
+
+::selection {
+  background: #1a4ada;
+  color: white;
+}
+
+
+
+body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+
+body>div {
+  width: 100%;
+}
+
+img {
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.App {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.unstyles-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  border: transparent;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.add-btn {
+  border: transparent;
+  background: transparent;
+  padding: 0;
+  margin: 8px;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  i {
+    font-size: 20px;
+    color: #fff;
+  }
+}
+
+.update-btn {
+  border-radius: 3px;
+  border: transparent;
+  background: #198754;
+  padding: 8px 10px;
+  margin: 0 5px;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #007a45;
+  }
+
+  i {
+    color: #fff;
+    font-size: 16px;
+  }
+}
+
+
+.delete-btn {
+  border-radius: 3px;
+  border: transparent;
+  background: #DC3545;
+  padding: 8px 10px;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #f00;
+  }
+
+  i {
+    color: #fff;
+    font-size: 16px;
+  }
+}
+
+.close-btn {
+  border: transparent;
+  background: transparent;
+  padding: 5px;
+  outline: none;
+  cursor: pointer;
+  i {
+    color: #000;
+    font-size: 20px;
+  }
+}
+
+
+.save-btn {
+  border-radius: 3px;
+  border: transparent;
+  background: #198754;
+  padding: 8px 10px;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+
+  &:hover {
+    background: #007a45;
+  }
+
+}
+
+.cancel-btn {
+  border-radius: 3px;
+  border: transparent;
+  background: #DC3545;
+  padding: 8px 10px;
+  margin: 0 5px;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+
+  &:hover {
+    background: #7e0000;
+  }
+}
+
+.submit-btn {
+  display: block;
+  border-radius: 3px;
+  border: transparent;
+  background: #198754;
+  padding: 8px 10px;
+  margin-left: auto;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+
+  &:hover {
+    background: #007a45;
+  }
+}
+button {
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    outline: none;
+  }
+}
+.table-scroll {
+  overflow-x: scroll;
+}

@@ -1,0 +1,23 @@
+.Input {
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    input {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 8px;
+        width: 100%;
+        margin-bottom: 10px;
+        outline: none;
+    } 
+    input:focus {
+        border: 1px solid #198754;
+    }
+
+    .error {
+        border: 1px solid #f00;
+    }
+}
+

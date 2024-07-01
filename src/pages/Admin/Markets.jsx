@@ -1,17 +1,17 @@
 import { memo, useEffect, useState } from "react"
 import { isAuthenticated } from "../../auth";
-import { getSellers, createSeller, deleteSeller } from '../../admin/apiAdmin';
+import { getMarkets, createMarket, deleteMarket } from '../../admin/apiAdmin';
 
 
 import AddWrapper from "../../components/AddWrapper/AddWrapper"
 import Alert from "../../components/Alert/Alert"
-import AddSeller from "../../components/AddSeller/AddSeller"
+import AddMarket from "../../components/AddMarket/AddMarket"
 
-function Seller() {
+function Markets() {
     const [alert, setAlert] = useState(false)
     const [alertType, setAlertType] = useState("")
     const [alertMessage, setAlertMessage] = useState("")
-    const [sellers, setSellers] = useState([])
+    const [markets, setMarkets] = useState([])
     const [addOpen, setAddOpen] = useState(false)
     const [name, setName] = useState("")
     const [phone, setPhone] = useState("")
@@ -29,10 +29,10 @@ function Seller() {
     }
     
     const handleDelete = async (id) => {
-        await deleteSeller(user._id, token, id).then(data => {
+        await deleteMarket(user._id, token, id).then(data => {
             if(data) {
-                setSellers(sellers.filter(sellers => sellers._id !== id))
-                alertStatus("success", "Targitolog o'chirildi")
+                setMarkets(markets.filter(markets => markets._id !== id))
+                alertStatus("success", "Do'kon o'chirildi")
             }
         })
         .catch(err => {
@@ -50,17 +50,17 @@ function Seller() {
             alertStatus("error", "Telefon raqam noto'g'ri")
             return
         }
-        createSeller(user._id, token, { name, phone, password }).then(data => {
+        createMarket(user._id, token, { name, phone, password }).then(data => {
             if (data.error) {
-                alertStatus("error", "Targitolog mavjud")
+                alertStatus("error", "Do'kon mavjud")
             } else {
                 setAddOpen(false)
-                alertStatus("success", "Targitolog qo'shildi")
-                getSellers().then(data => {
+                alertStatus("success", "Do'kon qo'shildi")
+                getMarkets().then(data => {
                     if (data.error) {
                         alertStatus("error", data.error)
                     } else {
-                        setSellers(data);
+                        setMarkets(data);
                     }
                 });
             }
@@ -69,11 +69,11 @@ function Seller() {
 
     useEffect(() => {
         const init = () => {
-            getSellers().then(data => {
+            getMarkets().then(data => {
                 if (data.error) {
                     alertStatus("error", data.error)
                 } else {
-                    setSellers(data);
+                    setMarkets(data);
                 }
             });
         };
@@ -84,7 +84,7 @@ function Seller() {
     return (
         <div className="Category">
             <div className="Category-header">
-                <h2>Sotuvchilar</h2>
+                <h2>Do'konlar</h2>
                 <button onClick={() => setAddOpen(true)} className="add-btn"><i className="fa-solid fa-plus"></i></button>
             </div>
             <table className="table-scroll">
@@ -94,18 +94,20 @@ function Seller() {
                         <th>Login</th>
                         <th>Phone</th>
                         <th>Balance</th>
-                        <th>Sold product</th>
+                        <th>Products</th>
+                        <th>Sold products</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {sellers && sellers.map((item, i) => {
+                    {markets && markets.map((item, i) => {
                         return (
                             <tr key={i}>
                                 <td>{item._id}</td>
                                 <td>{item.name}</td>
                                 <td>{item.phone}</td>
                                 <td>{item.balance}</td>
+                                <td>{item.products}</td>
                                 <td>{item.soldProduct}</td>
                                 <td>
                                     <button onClick={() => handleDelete(item._id)} className="delete-btn"><i className="fa-solid fa-trash-can"></i></button>
@@ -118,7 +120,7 @@ function Seller() {
             </table>
             <AddWrapper 
                 children={
-                    <AddSeller 
+                    <AddMarket 
                         onSubmit={clickSubmit} 
                         setName={setName}
                         setPhone={setPhone}
@@ -133,4 +135,4 @@ function Seller() {
     )
 }
 
-export default memo(Seller)
+export default memo(Markets)

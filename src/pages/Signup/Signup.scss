@@ -56,6 +56,13 @@
         }
     }
 }
+.signup-alert {
+    z-index: 999;
+    a {
+        color: #fff;
+        font-weight: bold;
+    }
+}
 .password-wrap {
     position: relative;
 

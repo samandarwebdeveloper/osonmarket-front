@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react"
-import { getProducts } from "../../core/apiCore";
+import { getAllProducts } from "../../core/apiCore";
 import { isAuthenticated } from "../../auth";
 import { deleteProduct } from '../../admin/apiAdmin';
 import { API } from "../../config";
@@ -40,7 +40,7 @@ function Products() {
 
     useEffect(() => {
         const init = () => {
-            getProducts().then(data => {
+            getAllProducts().then(data => {
                 if (data.error) {
                     alertStatus("error", data.error)
                 } else {
@@ -60,12 +60,15 @@ function Products() {
             <table className="table-scroll">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>№</th>
                         <th>Rasm</th>
                         <th>Nomi</th>
+                        <th>Kategoriya</th>
                         <th>Narxi</th>
+                        <th>Oqim narxi</th>
                         <th>Miqdori</th>
                         <th>Video</th>
+                        <th>Do'kon</th>
                         <th>O'chirish</th>
                     </tr>
                 </thead>
@@ -73,7 +76,7 @@ function Products() {
                     {products && products.map((item, i) => {
                         return (
                             <tr key={i}>
-                                <td>{item._id}</td>
+                                <td>{i + 1}</td>
                                 <td><img
                                     src={`${API}/product/photo/${item._id}`}
                                     alt={item.name}
@@ -81,9 +84,12 @@ function Products() {
                                     style={{ maxHeight: "100%", maxWidth: "120px", width: "100%" }}
                                 /></td>
                                 <td>{item.name}</td>
+                                <td className="product-list-name">{item.category.name}</td>
                                 <td>{item.price} so'm</td>
+                                <td>{item.sellPrice} so'm</td>
                                 <td>{item.quantity} dona</td>
                                 <td><a href={item.video_link}>Video</a></td>
+                                <td>{item.market.name}</td>
                                 <td>
                                     <button onClick={() => handleDelete(item._id)} className="delete-btn"><i className="fa-solid fa-trash-can"></i></button>
                                 </td>

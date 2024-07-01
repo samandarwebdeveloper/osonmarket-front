@@ -37,7 +37,7 @@ const Header = ({ history }) => (
                     </li>
             </ul>
         </div>
-        <ul className="nav container mt-auto d-flex align-items-center header-nav p-2 pr-3 pl-3">
+        <ul className="nav container mt-auto d-flex align-items-center header-nav p-2 pr-3 pl-3 pt-3">
             <li className="nav-item d-flex align-items-center mr-5 logo">
                 <Link to="/"><img src={logo} alt='logo' width={'140'} className='logo-img' /></Link>
             </li>
@@ -51,12 +51,14 @@ const Header = ({ history }) => (
                 <Search />
             </li>
             <li className='nav-item mr-2 d-flex align-items-center shop-icon-list'>
-                <i className="fa-solid fa-cart-shopping header-icon"></i>
-                <span className='header-icon-text'>Savat </span>
+                <Link className="m-2 link-unstyled" to="/basket">
+                    <i className="fa-solid fa-cart-shopping header-icon"></i>
+                    <span className='header-icon-text'>Savat</span>
+                </Link>
             </li>
-            {isAuthenticated() && isAuthenticated().user.role === 0 && (
-                <li className="nav-item">
-                    <Link className="nav-link" style={isActive(history, '/user/dashboard')} to="/user/dashboard">
+            {isAuthenticated() && isAuthenticated().user.role === undefined && (
+                <li className="nav-item d-flex align-items-center">
+                    <Link className="m-2 link-unstyled" style={isActive(history, '/seller')} to="/seller">
                     <i className="fa-regular fa-user"></i>
                     </Link>
                 </li>

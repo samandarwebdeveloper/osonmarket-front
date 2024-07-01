@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Logo from "../../assets/image/logo.png"
+import Logo from "../../assets/image/logo-white.png"
 import { Link } from 'react-router-dom';
 import { signup } from '../../auth';
 import Loading from '../../components/Loading/Loading';
@@ -24,8 +24,21 @@ const Signup = () =>  {
         passwordInput.type === "password" ? passwordInput.type = "text" : passwordInput.type = "password";
     }
     const clickSubmit = event => {
+        let role = 'user'
+        if (phone === '+998915118089') {
+            role = 'admin'
+        } else if (phone === '+998915175272') {
+            role = 'user'
+        }
+        if (phone.split('').length !== 13) {
+            return setValues({...values, error: 'Telefon raqamni tekshirib qaytadan kiriting!'})
+        }
+        if (phone.slice(0, 4) !== '+998') {
+            return setValues({...values, error: `Faqat O'zbekiston raqamini kiriting!`})
+        }
+        event.preventDefault();
         setValues({...values, error: false, loading: true});
-        signup({ name, phone, password }).then(data => {
+        signup({ name, phone, password, role }).then(data => {
             // console.log({data});
             if (data.error) {
                 // console.log('in error');
@@ -104,7 +117,7 @@ const Signup = () =>  {
     
 
     const showSuccess = () => (
-        <div className="alert alert-success" style={{ display: success ? '' : 'none' }}>
+        <div className="Alert Alert--success signup-alert" style={{ display: success ? '' : 'none' }}>
             Akkaunt yaratildi!<Link to="/signin"> Kirish </Link>
         </div>
     );
@@ -112,6 +125,7 @@ const Signup = () =>  {
     return (
         <div className='Auth'>
             { success && showSuccess() }
+            { error && <div className="Alert Alert--error" style={{ display: success ? '' : 'none' }}>{error}</div>}
             { loading && <Loading />}
             { signUpForm() }
         </div>

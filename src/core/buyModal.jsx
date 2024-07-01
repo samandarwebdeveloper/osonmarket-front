@@ -16,15 +16,18 @@ function BuyModal({setModal, id, product, setSoldModal}) {
     } = values;
 
     const handleChange = name => e => {
-        const value = name === "tel" ? e.target.value.slice(0, 12) : e.target.value;
+        const value = name === "tel" ? e.target.value.slice(0, 13) : e.target.value;
         setValues({ ...values, [name]: value });
     };
     const handleSubmit = event => {
         event.preventDefault();
         setValues({ ...values, error: '', loading: true });
         const number = tel.split('').length
-        if(number < 12 || number > 12) {
+        if(number !== 13) {
             return setValues({...values, error: 'Telefon raqamni tekshirib qaytadan kiriting!'})
+        }
+        if(tel.slice(0, 4) !== '+998') {
+            return setValues({...values, error: `Faqat O'zbekiston raqamini kiriting!`})
         }
 
         order(id, emaunt, price, name, tel).then(data => {
@@ -57,7 +60,7 @@ function BuyModal({setModal, id, product, setSoldModal}) {
                 </header>
                 <div>
                     <div className="mb-2 d-flex align-items-center">
-                        <img className="border mr-3" width={'150px'} src={`${API}/product/photo/${product._id}`} alt="img" />
+                        <img className="border mr-3 buyModal-img" width={'150px'} src={`${API}/product/photo/${product._id}`} alt="img" />
                         <div className="mt-3">
                             <p>{product.name}</p>
                             <p>{price} so'm</p>
@@ -75,7 +78,7 @@ function BuyModal({setModal, id, product, setSoldModal}) {
                         </div>
                         <div className="form-group">
                             <label>Telefon raqamingizni kiriting</label>
-                            <input className="form-control" value={tel} name="tel" type="number" placeholder="998901234567" onChange={handleChange('tel')} maxLength={13} minLength={12} required />
+                            <input className="form-control" value={tel} name="tel" type="text" placeholder="+998901234567" onChange={handleChange('tel')} maxLength={13} minLength={13} required />
                         </div>
                         <button className="btn btn-warning btn-block" type="submit">Buyurtma qilish</button>
                     </form>

@@ -213,3 +213,136 @@ button {
 .table-scroll {
   overflow-x: scroll;
 }
+
+.add-product-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  margin: 20px 0;
+
+}
+
+
+.image-input {
+  width: 40%;
+  padding: 10px;
+  input {
+    margin: 20px 0;
+  }
+  img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 2px;
+  }
+}
+
+.product-inputs {
+  width: 60%;
+  padding: 10px;
+}
+
+.product-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  .product-carousel {
+    width: 50%;
+  }
+  .product-info {
+    width: 50%;
+    padding: 20px;
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    span {
+      font-size: 16px;
+      font-weight: bold;
+      color: #241987;
+    }
+  
+  }
+}
+
+.dot-group {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin: 15px 0;
+
+  .carousel__dot--selected {
+    display: block;
+    padding: 5px;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ccc;
+    margin: 0 1px;
+    :focus {
+      outline: none;
+    }
+  }
+  img {
+    width: 100%;
+    max-width: 50px;
+    height: auto;
+    object-fit: contain;
+  }
+
+}
+
+.carousel__back-button {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: transparent;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.carousel__next-button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: transparent;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.buyModal-img {
+  width: 150px;
+}
+
+@media screen and (max-width: 600px) {
+  .add-product-div {
+    flex-direction: column;
+  }
+
+  .image-input {
+    width: 100%;
+  }
+
+  .product-inputs {
+    width: 100%;
+  }
+  
+}

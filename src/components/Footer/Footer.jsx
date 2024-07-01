@@ -1,6 +1,6 @@
 import React from "react";
 import './Footer.scss'
-import logo from '../../assets/image/logo.png'
+import logo from '../../assets/image/logo-white.png'
 import { Link } from "react-router-dom";
 
 function getYear() {

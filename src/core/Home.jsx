@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Layout from './Layout';
-import {getAllProducts} from './apiCore';
+import {getProducts} from './apiCore';
 import Card from '../components/Card/Card';
 import Carousel from './Carousel';
 
@@ -10,7 +10,7 @@ const Home = () =>  {
     const [error, setError] = useState(false);
 
     const loadProductsBySell = () => {
-        getAllProducts('sold').then(data => {
+        getProducts('sold').then(data => {
             if (data.error) {
                 setError(data.error);
             } else {
@@ -20,7 +20,7 @@ const Home = () =>  {
     };
 
     const loadProductsByArrival = () => {
-        getAllProducts('createdAt').then(data => {
+        getProducts('createdAt').then(data => {
             if (data.error) {
                 setError(data.error);
             } else {
@@ -37,11 +37,9 @@ const Home = () =>  {
     return (
         <Layout title="Home Page" description="Osonmarket" className="container">
             <Carousel />
-            <div className="row"> 
+            <div className="productList"> 
                 {productsByArrival.map((product, i) => (
-                    <div key={i} className="col-md-3 mb-3 col-6"> 
-                        <Card key={i} product={product}/> 
-                    </div>
+                    <Card key={i} product={product}/> 
                 ))}
             </div>
             <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>

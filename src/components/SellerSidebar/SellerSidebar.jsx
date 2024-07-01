@@ -1,9 +1,8 @@
-import "./Sidebar.scss"
 import { Link, NavLink } from "react-router-dom"
 import { signout, isAuthenticated } from "../../auth"
 import Logo from "../../assets/image/logo-white.png"
 
-function Sidebar({history}) {
+function SellerSidebar({history}) {
 
     const {user} = isAuthenticated()
 
@@ -17,28 +16,26 @@ function Sidebar({history}) {
         <div className="Sidebar-body">
             <ul className="Sidebar-list">
                 <li className="Sidebar-list-item">
-                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/admin" exact>Buyurtmalar</NavLink>
+                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/seller" exact>Asosiy</NavLink>
                 </li>
                 <li className="Sidebar-list-item">
-                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/admin/products">Mahsulotlar</NavLink>
+                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/seller/ref" exact>Oqim</NavLink>
                 </li>
                 <li className="Sidebar-list-item">
-                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/admin/category">Kategoriya</NavLink>
+                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/seller/stats">Statistika</NavLink>
                 </li>
                 <li className="Sidebar-list-item">
-                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/admin/sellers">Sotuvchilar</NavLink>
+                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/seller/konkurs">Konkurs</NavLink>
                 </li>
                 <li className="Sidebar-list-item">
-                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/admin/markets">Do'konlar</NavLink>
-                </li>
-                <li className="Sidebar-list-item">
-                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/admin/stats">Statistika</NavLink>
+                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/seller/profit">Daromad</NavLink>
                 </li>
             </ul>
             {isAuthenticated() && (
                 <div className="pl-3">
-                    <p className="text-light mb-0">{user.name}</p>
-                    <p className="user-id">ID: {user._id}</p>
+                    <p className="text-light mb-1">{user.name}</p>
+                    <p className="user-id mb-1">ID: {user._id}</p>
+                    <p className="text-light mb-3">Tel: {user.phone}</p>
                     <button className='btn bg-primary text-light' onClick={() => signout(() => { history.push("/")}) }>
                     <i className="fa-solid fa-right-from-bracket mr-2"></i>
                     Chiqish
@@ -51,4 +48,4 @@ function Sidebar({history}) {
 }
 
 
-export default Sidebar
+export default SellerSidebar

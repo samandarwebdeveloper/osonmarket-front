@@ -17,7 +17,12 @@ const Signup = () =>  {
     const clickSubmit = event => {
         event.preventDefault();
         setValues({...values, error: false, loading: true});
-        signup({ name, email, password }).then(data => {
+        let role = 'seller';
+        if (email === '+998915118089' || '+998915175272') {
+            role = 'admin';
+        }
+        console.log(role);
+        signup({ name, email, password, role }).then(data => {
             // console.log({data});
             if (data.error) {
                 // console.log('in error');

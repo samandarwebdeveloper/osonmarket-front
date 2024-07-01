@@ -1,9 +1,4 @@
-.product-card {
-    width: 100%;
-    // max-width: 200px;
 
-
-}
 .card-basket-btn {
     background: #EBEFF3;
     display: flex;
@@ -13,6 +8,8 @@
     border: none;
     border-radius: 5px;
     transition: opacity 0.15s ease-in-out;
+    position: absolute;
+    right: 0;
 
     &:hover {
         opacity: 0.8;
@@ -63,6 +60,7 @@
         opacity: 0.8;
     }
 }
+
 
 @media screen and (max-width: 600px) {
     .mediaCard {

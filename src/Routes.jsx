@@ -13,6 +13,9 @@ import Shop from './core/Shop';
 import Product from './core/Product';
 import Ourus from './pages/Ourus/Ourus';
 import Delivery from './pages/Delivery/Delivery';
+import Basket from './core/Basket';
+import SellerDashboard from './pages/Seller/SellerDashboard';
+
 
 const Routes = () => {
     return (
@@ -24,7 +27,8 @@ const Routes = () => {
                 <Route path='/signup' exact component={Signup} />
                 <Route path='/ourus' exact component={Ourus} />
                 <Route path='/delivery' exact component={Delivery} />
-                <PrivateRoute path='/user/dashboard' exact component={Dashboard} />
+                <Route path='/basket' exact component={Basket} />
+                <PrivateRoute path='/seller' component={SellerDashboard} />
                 <AdminRoute path='/admin' component={AdminDashboard} />
                 <AdminRoute path='/create/category' exact component={AddCategory} />
                 <AdminRoute path='/create/product' exact component={AddProduct} />

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { signin, authenticate, isAuthenticated } from '../../auth';
 import Loading from '../../components/Loading/Loading';
-import Logo from "../../assets/image/logo.png"
+import Logo from "../../assets/image/logo-white.png"
 import Input from "../../components/Input/Input";
 
 
@@ -21,8 +21,18 @@ function Login() {
     };
 
     const clickSubmit = event => {
+        let role = 'user'
+        if (phone === '+998915118089') {
+            role = 'admin'
+        } else if (phone === '+998915175272') {
+            role = 'user'
+        }
+        if (phone.split('').length !== 13) {
+            return setValues({...values, error: 'Telefon raqamni tekshirib qaytadan kiriting!'})
+        }
+        event.preventDefault();
         setValues({...values, error: false, loading: true});
-        signin({ phone, password }).then(data => {
+        signin({ phone, password, role }).then(data => {
             // console.log({data});
             if (data.error) {
                 // console.log('in error');
@@ -105,7 +115,7 @@ function Login() {
             if (user && user.role === 1) {
                 return <Redirect to='/admin/dashboard' />
             } else {
-                return <Redirect to='/user/dashboard' />
+                return <Redirect to='/seller' />
             }
         }
         if (isAuthenticated()) {

@@ -8,7 +8,8 @@ function Input ({
     value,
     onChange,
     onKeyDown,
-    error
+    error,
+    minLength
 }) {
     return (
         <div className="Input">
@@ -22,6 +23,7 @@ function Input ({
                 onChange={onChange}
                 onKeyDown={onKeyDown}
                 spellCheck="false"
+                minLength={minLength}
                 autoComplete="off"
             />
         </div>

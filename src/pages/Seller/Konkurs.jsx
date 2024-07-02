@@ -22,7 +22,7 @@ function Konkurs() {
     return (
         <div className="Category">
             <div className="Category-header">
-                <h2>{seller.balance} so'm</h2>
+                <h2>{seller.balance ? seller.balance : 0} so'm</h2>
             </div>
             <div className="Category-body">
                 <img src={Gentra} alt="Gentra" />

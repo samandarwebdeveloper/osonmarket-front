@@ -1,8 +1,8 @@
 import React from 'react';
 
-import img1 from "../assets/image/img1.png"
-import img2 from "../assets/image/img2.jpg"
-import img3 from "../assets/image/img3.jpg"
+import img1 from "../assets/image/1.png"
+import img2 from "../assets/image/2.jpg"
+import img3 from "../assets/image/3.jpg"
 
 const Carousel = () => {
     return (

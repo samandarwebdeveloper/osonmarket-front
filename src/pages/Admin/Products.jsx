@@ -67,8 +67,9 @@ function Products() {
                         <th>Narxi</th>
                         <th>Oqim narxi</th>
                         <th>Miqdori</th>
-                        <th>Video</th>
+                        <th>Material</th>
                         <th>Do'kon</th>
+                        <th>Sotildi</th>
                         <th>O'chirish</th>
                     </tr>
                 </thead>
@@ -81,15 +82,16 @@ function Products() {
                                     src={`${API}/product/photo/${item._id}`}
                                     alt={item.name}
                                     className="mb-3"
-                                    style={{ maxHeight: "100%", maxWidth: "120px", width: "100%" }}
+                                    style={{ maxHeight: "100%", maxWidth: "80px", width: "100%" }}
                                 /></td>
                                 <td>{item.name}</td>
                                 <td className="product-list-name">{item.category.name}</td>
                                 <td>{item.price} so'm</td>
                                 <td>{item.sellPrice} so'm</td>
                                 <td>{item.quantity} dona</td>
-                                <td><a href={item.video_link}>Video</a></td>
+                                <td><a href={item.video_link}>Material</a></td>
                                 <td>{item.market.name}</td>
+                                <td>{item.sold}</td>
                                 <td>
                                     <button onClick={() => handleDelete(item._id)} className="delete-btn"><i className="fa-solid fa-trash-can"></i></button>
                                 </td>

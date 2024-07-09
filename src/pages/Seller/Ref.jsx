@@ -1,7 +1,7 @@
 import { memo, useState, useEffect } from "react"
 import { isAuthenticated } from "../../auth";
 import { getReferrals, removeReferral, getSellerById } from "../../admin/apiAdmin";
-import { API } from "../../config";
+import { API, URL } from "../../config";
 import Alert from "../../components/Alert/Alert";
 
 function Ref() {
@@ -58,6 +58,11 @@ function Ref() {
         })
     }
     , [])
+
+    const copyRefUrl = (url) => {
+        navigator.clipboard.writeText(url)
+        alertStatus("success", "Link nusxalandi")
+    }
     return (
         <div className="Category">
             <div className="Category-header">
@@ -65,19 +70,29 @@ function Ref() {
             </div>
             <div className="productList">
                 {referrals && referrals.map((referral, i) => (
-                    <div key={i} className="product-card showImg">
-                        <img src={`${API}/product/photo/${referral.productId}`} alt={referral.productName} />
-                        <h3>Nomi: <span>{referral.name}</span></h3>
-                        <p>Mahsulot nomi: <span>{referral.productName}</span></p>
-                        <p>Oqim narxi: <span>{referral.price}</span></p>
-                        <p>Mahsulot narxi: <span>{referral.productPrice}</span></p>
-                        <p>Qo'shilgan vaqti: <span>{new Date(referral.createdAt).toLocaleDateString('en-GB').replace(/\//g, '.')}</span></p>
-                        <div className="ref-card-actions">
-                            <button className="delete-btn" onClick={() => handleRemove(referral._id)}><i className="fa-solid fa-trash"></i></button>
-                            <a href={`/product/${referral.product}`} className="edit-btn"><i className="fa-solid fa-eye"></i></a>
-                            <button className="copy-btn"><i className="fa-solid fa-copy"></i></button>
+                    referral.productId ?
+                        <div key={i} className="product-card">
+                            <img className="showImg" src={`${API}/product/photo/${referral.productId._id}`} alt={referral.productId.name} />
+                            <h3>Nomi: <span>{referral.name}</span></h3>
+                            <p>Mahsulot nomi: <span>{referral.productName}</span></p>
+                            <p>Oqim narxi: <span>{referral.price}</span></p>
+                            <p>Mahsulot narxi: <span>{referral.productPrice}</span></p>
+                            <p>Qo'shilgan vaqti: <span>{new Date(referral.createdAt).toLocaleDateString('en-GB').replace(/\//g, '.')}</span></p>
+                            <div className="ref-card-actions">
+                                <button className="delete-btn" onClick={() => handleRemove(referral._id)}><i className="fa-solid fa-trash"></i></button>
+                                <a href={`${URL}product/${referral.productId._id}?ref=${referral._id}`} target="_blank" rel="noreferrer">
+                                    <i className="fa-solid fa-link"></i>
+                                </a>
+                                <button className="copy-btn" onClick={() => copyRefUrl(`http://localhost:5173/product/${referral.productId._id}?ref=${referral._id}`)}>
+                                    <i className="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                        : <div key={i} className="product-card">
+                            <p>Mahsulot topilmadi</p>
+                            <h3>Nomi: <span>{referral.name}</span></h3>
+                            <button className="delete-btn" onClick={() => handleRemove(referral._id)}><i className="fa-solid fa-trash"></i></button>
+                        </div>
                 ))}
             </div>
             {alert && <Alert setAlert={setAlert} alertType={alertType} alertMessage={alertMessage} />}

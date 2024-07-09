@@ -23,18 +23,31 @@ const Product = props => {
     const [soldModal, setSoldModal] = useState(false)
     const [buyProduct, setBuyProduct] = useState('')
     const [loading, setLoading] = useState(true)
+    const [referral, setReferral] = useState('')
 
     const handleBuy = (e) => {
         setModal(true)
         setBuyProduct(e.target.id)
+        const referralId = props.location.search.split('=')[1]
+        if(referralId) {
+            setReferral(referralId)
+        }
     }
 
     const handleAddCard = (e) => {
         if (typeof window !== 'undefined') {
-            // let cart = [] if (localStorage.getItem('cart')) {     cart =
-            // JSON.parse(localStorage.getItem('cart')) } cart.push({     ...product,
-            // count: 1 }) let unique = [...new Set(cart.map(item => item._id))]
-            // localStorage.setItem('cart', JSON.stringify(unique))
+            let card = []
+            if (localStorage.getItem('card')) {
+                card = JSON.parse(localStorage.getItem('card'))
+            }
+            card.push({
+                ...product,
+                count: 1
+            })
+            let unique = [...card.map(item => item._id == product._id)]
+            if (unique.length) {
+                localStorage.setItem('card', JSON.stringify(card))
+            }
         }
     }
 
@@ -58,7 +71,6 @@ const Product = props => {
         return {__html: string};
     }
     return (
-        <div>
             <Layout
                 title={product && product.name}
                 description={product && product.description && product
@@ -66,7 +78,9 @@ const Product = props => {
                     .substring(0, 100)}
                 className="container">
                 {
-                    props && props.match.params.productId === product._id && <div className="product-page">
+                    props && props.match.params.productId === product._id && 
+                    <div className='mb-5'>
+                    <div className="product-page">
                         <div className='product-carousel'>
                             <CarouselProvider
                                 naturalSlideWidth={100}
@@ -74,7 +88,7 @@ const Product = props => {
                                 totalSlides={3}
                                 visibleSlides={1}
                                 infinite={true}>
-
+                                
                                 <Slider>
                                     <Slide index={0}>
                                         <Image
@@ -115,8 +129,8 @@ const Product = props => {
                             </CarouselProvider>
                         </div>
                         <div className="product-info">
-                            <h2>{product.name}</h2>
-                            <p>{
+                            <h2 className='product-name'>{product.name}</h2>
+                            <p className='product-price'>{
                                     product.price
                                         .toString()
                                         .split("")
@@ -130,23 +144,28 @@ const Product = props => {
                                         .join("")
                                 }
                                 so'm</p>
-                            <p>{product.quantity}
-                                dona qoldi</p>
+                            <p className='product-quantity'>{product.quantity} dona qoldi</p>
+                            <div className="product-info-actions">
                             <button
-                                className='card-basket-btn ml-2'
-                                onClick={handleAddCard}
-                                id={product._id}>
-                                <i className="fa-solid fa-cart-shopping card-icon"></i>
-                            </button>
-                            <button
-                                className="buyBtn mt-2 mb-2 mobileBtn"
+                                className="product-buy-btn"
                                 onClick={handleBuy}
                                 id={product._id}>
                                 Xarid qilish
                             </button>
-                            <div dangerouslySetInnerHTML={createMarkup(product.description)}/>
+                            <button
+                                className='product-add-card-btn'
+                                onClick={handleAddCard}
+                                id={product._id}>
+                                <span>Savatga qo'shish </span>
+                                <i className="fa-solid fa-cart-shopping card-icon"></i>
+                            </button>
+                            </div>
                         </div>
                     </div>
+                    <p className='product-description-title'>Mahsulot haqida</p>
+                    <div dangerouslySetInnerHTML={createMarkup(product.description)}/>
+                    </div>
+
                 }
                 <div
                         className="alert alert-danger"
@@ -157,18 +176,18 @@ const Product = props => {
                         }}>
                         {error}
                     </div>
-                </Layout>
                     {
-                    soldModal && <SoldModal setSoldModal={setSoldModal}/>
-                } {
-                    modal && <BuyModal
-                            setModal={setModal}
-                            id={buyProduct}
-                            product={product}
-                            setSoldModal={setSoldModal}/>
-                }
+                        soldModal && <SoldModal setSoldModal={setSoldModal}/>
+                    } {
+                        modal && <BuyModal
+                        setModal={setModal}
+                        id={buyProduct}
+                        product={product}
+                        referral={referral}
+                        setSoldModal={setSoldModal}/>
+                    }
                 { loading && <Loading />}
-                </div>
+                    </Layout>
     );
 };
 

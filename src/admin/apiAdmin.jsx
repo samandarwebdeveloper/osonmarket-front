@@ -298,3 +298,69 @@ export const getProfitsById = (userId, token) => {
         console.log(err)
     })
 }
+
+export const getAllProfits = (token) => {
+    return fetch(`${API}/profits`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(res => {
+        return res.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export const getAllOrders = (token) => {
+    return fetch(`${API}/orders`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(res => {
+        return res.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export const updateOrderStatus = (userId, token, orderId, status) => {
+    return fetch(`${API}/order/${orderId}/${userId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({status})
+    })
+    .then(res => {
+        return res.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export const deleteOrder = (userId, token, orderId) => {
+    return fetch(`${API}/order/${orderId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(res => {
+        return res.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}

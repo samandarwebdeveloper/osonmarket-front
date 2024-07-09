@@ -34,9 +34,14 @@ function Sidebar({history}) {
                 <li className="Sidebar-list-item">
                     <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/admin/stats">Statistika</NavLink>
                 </li>
+                <li className="Sidebar-list-item">
+                    <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/admin/profit">Sotuvchi daromadi</NavLink>
+                </li>
             </ul>
+        </div>
+        <div className="Sidebar-footer">
             {isAuthenticated() && (
-                <div className="pl-3">
+                <div>
                     <p className="text-light mb-0">{user.name}</p>
                     <p className="user-id">ID: {user._id}</p>
                     <button className='btn bg-primary text-light' onClick={() => signout(() => { history.push("/")}) }>

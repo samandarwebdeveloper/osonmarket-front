@@ -1,3 +1,8 @@
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
 .footer-nav {
     justify-content: space-between;
     width: 80%;
@@ -16,7 +21,7 @@
     }
 }
 .sign-btn {
-    display: block;
+    display: inline-block;
     text-decoration: none;
     color: #000;
     background-color: #fff;
@@ -63,10 +68,29 @@
 @media screen and (max-width: 600px) {
     .footer {
         align-items: end;
+        flex-wrap: wrap;
     }
     .footer-nav {
         flex-direction: column;
-        width: 50%;
+        width: 100%;
+    }
+    .footer-li-h {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+    .phone-link-footer {
+        margin-top: 15px;
+    }
+    
+}
+
+@media screen and (max-width: 300px) {
+    .footer {
+        align-items: end;
+    }
+    .footer-nav {
+        flex-direction: column;
+        width: 100%;
     }
     .footer-li-h {
         margin-top: 15px;

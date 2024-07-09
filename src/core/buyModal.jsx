@@ -4,7 +4,7 @@ import {API} from "../config"
 import Loading from "../components/Loading/Loading";
 
 
-function BuyModal({setModal, id, product, setSoldModal}) {
+function BuyModal({setModal, id, product, referral, setSoldModal}) {
     const [values, setValues] = useState({
         emaunt: 1, price: product.price, name: '', tel: "", loading: false, error: ''
     });
@@ -30,8 +30,8 @@ function BuyModal({setModal, id, product, setSoldModal}) {
             return setValues({...values, error: `Faqat O'zbekiston raqamini kiriting!`})
         }
 
-        order(id, emaunt, price, name, tel).then(data => {
-            if (data.message === 'ok') {
+        order(id, emaunt, price, name, tel, product.market._id ? product.market._id : product.market, referral ? referral : null).then(data => {
+            if (data) {
                 setValues({
                     ...values, name: '', tel: 0, loading: false, error: '' 
                 });
@@ -53,7 +53,7 @@ function BuyModal({setModal, id, product, setSoldModal}) {
     return (
         <div className="modalWrapper">
             {loading && <Loading />}
-            <div className="p-3 bg-white modalBody">
+            <div className="modalBody">
                 <header className="d-flex align-items-center justify-content-between">
                     <h5 className="m-0 mb-2">Ma'lumotlarni kiriting</h5>
                     <button className="btn close p-1" onClick={handleClose}><i className="fa-solid fa-times"></i></button>
@@ -62,11 +62,20 @@ function BuyModal({setModal, id, product, setSoldModal}) {
                     <div className="mb-2 d-flex align-items-center">
                         <img className="border mr-3 buyModal-img" width={'150px'} src={`${API}/product/photo/${product._id}`} alt="img" />
                         <div className="mt-3">
-                            <p>{product.name}</p>
-                            <p>{price} so'm</p>
-                            <div className="d-flex align-items-center">
+                            <p className="buymodal-product-name">{product.name}</p>
+                            <p>{price.toString()
+                                        .split("")
+                                        .reverse()
+                                        .map(
+                                            (v, i, a) => (i < a.length - 1 && i % 3 == 0 || i % 6 == 0)
+                                                ? v + " "
+                                                : v
+                                        )
+                                        .reverse()
+                                        .join("")} so'm</p>
+                            <div className="buyModal-emaunt">
                                 <button onClick={handleMinus} className="btn border rounded">-</button>
-                                <p className="pt-3 pl-3 pr-3">{emaunt}</p>
+                                <p className="p-3 mb-0">{emaunt}</p>
                                 <button onClick={handleAdd} className="btn border rounded">+</button>
                             </div>
                         </div>
@@ -80,9 +89,9 @@ function BuyModal({setModal, id, product, setSoldModal}) {
                             <label>Telefon raqamingizni kiriting</label>
                             <input className="form-control" value={tel} name="tel" type="text" placeholder="+998901234567" onChange={handleChange('tel')} maxLength={13} minLength={13} required />
                         </div>
+                        {error && <p className="mt-1 mb-1 text-danger">{error}</p>}
                         <button className="btn btn-warning btn-block" type="submit">Buyurtma qilish</button>
                     </form>
-                    {error && <p className="mt-2 text-danger">{error}</p>}
                 </div>
             </div>
         </div>  

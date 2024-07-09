@@ -31,15 +31,17 @@ function SellerSidebar({history}) {
                     <NavLink className="Sidebar-list-item-link" activeClassName="Sidebar-list-item-link-active" to="/seller/profit">Daromad</NavLink>
                 </li>
             </ul>
+        </div>
+        <div className="Sidebar-footer">
             {isAuthenticated() && (
-                <div className="pl-3">
+                <div>
                     <p className="text-light mb-1">{user.name}</p>
                     <p className="user-id mb-1">ID: {user._id}</p>
                     <p className="text-light mb-3">Tel: {user.phone}</p>
                     <button className='btn bg-primary text-light' onClick={() => signout(() => { history.push("/")}) }>
                     <i className="fa-solid fa-right-from-bracket mr-2"></i>
                     Chiqish
-                </button>
+                    </button>
                 </div>
             )}
         </div>

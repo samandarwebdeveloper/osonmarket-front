@@ -92,9 +92,9 @@ export const read = productId => {
     .catch(err => console.log(err));
 };
 
-export const order = (id, emaunt, price, name, tel) => {
+export const order = (id, emaunt, price, name, tel, marketId, referral) => {
     const data = {
-        emaunt, price, name, tel
+        emaunt, price, name, tel, marketId, referral: referral || null
     }
     return fetch(`${API}/order/${id}`, {
         method: "POST",

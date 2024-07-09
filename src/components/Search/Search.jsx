@@ -38,7 +38,7 @@ const Search = () => {
 
     const searchMessage = (searched, results) => {
         if (searched && results && results.length > 0) {
-            return `${results.length} natija`;
+            return `${search} qidiruv bo'yicha ${results.length} ta mahsulot topildi`;
         }
         if (searched && results && results.length < 1) {
             return `Mahsulot topilmadi`;
@@ -48,18 +48,18 @@ const Search = () => {
     const searchedProducts = (results = []) => {
         return (
             <div className="position-absolute products-searched mt-2">
-                <div className="mt-4 mb-4 d-flex align-items-center justify-content-spacebetwen border-bottom pl-3 pr-3">
-                    <h2>
+                <div className="container header">
+                    <p>
                         {searchMessage(searched, results)}
-                    </h2>
+                    </p>
                     <button className="close-btn" onClick={() => setData({...data, results: null})}>
                         <i className="fa-solid fa-times"></i>
                     </button>
                 </div>
 
-                <div className="row w-100 scroll mb-4">
+                <div className="searcher-products-list container">
                     {results && results.map((product, i) => (
-                        <div key={i} className="caRD" >
+                        <div key={i} className="searcher-products-card" >
                             <Card product={product}  />
                         </div>
                     ))}

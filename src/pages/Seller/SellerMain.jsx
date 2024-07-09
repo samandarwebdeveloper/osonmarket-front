@@ -85,7 +85,7 @@ function SellerMain() {
                     <p>Daromad: <span>{product.sellPrice}</span> so'm</p>
                     <span>ID: {product._id}</span>
                     <div className="product-card-actions">
-                        <a href={`/${product._id}`} >Material</a>
+                        <a href={product.video_link} >Material</a>
                         <button onClick={() => handleAddORefOpen(product)}>Oqim olish</button>
                     </div>
                 </div>

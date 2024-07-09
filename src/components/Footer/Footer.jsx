@@ -10,10 +10,10 @@ function getYear() {
 
 const Footer = () => {
     return (
-        <div className="main-color">
+        <div className="main-color footer">
             <div className="container pt-5 pb-4"> 
             <div className="footer">
-                <ul className="nav mt-auto d-flex align-items-start footer-nav">
+                <ul className="nav mt-auto d-flex align-items-start footer-nav justify-content-between">
                     <li className="nav-item d-flex align-items-center">
                         <Link to="/"><img src={logo} alt='logo' width={'140'} /></Link>
                     </li>
@@ -26,8 +26,8 @@ const Footer = () => {
                         <h6 className="text-white footer-li-h">Tadbirkorlar uchun</h6>
                         <a className="footer-text-links" href="https://t.me/Islombek_Buriyev">Mahsulot sotish</a>
                     </li>
-                    <li>
-                        <h6 className="text-white footer-li-h">Osonmarketda pul <br /> ishlash</h6>
+                    <li className="nav-item">
+                        <h6 className="text-white footer-li-h">Osonmarketda pul ishlash</h6>
                         <Link to="/signup" className="sign-btn">
                             Ro'yxatdan o'tish
                         </Link>

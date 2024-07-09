@@ -5,7 +5,9 @@ import Category from './Category';
 import Products from './Products';
 import Seller from './Seller';
 import Markets from './Markets';
+import Order from './Order';
 import {withRouter} from 'react-router-dom';
+import AdminProfit from './AdminProfit';
 import "./Admin.scss"
 
 
@@ -15,10 +17,12 @@ const AdminDashboard = ({history}) => {
             <Sidebar history={history} />
             <div className='Content'>
             <Switch>
+                <Route path="/admin" component={Order} exact/>
                 <Route path="/admin/category" component={Category}/>
                 <Route path="/admin/products" component={Products}/>
                 <Route path="/admin/sellers" component={Seller}/>
                 <Route path="/admin/markets" component={Markets}/>
+                <Route path="/admin/profit" component={AdminProfit}/>
             </Switch>
             </div> 
         </div>

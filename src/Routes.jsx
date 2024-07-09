@@ -13,7 +13,7 @@ import Shop from './core/Shop';
 import Product from './core/Product';
 import Ourus from './pages/Ourus/Ourus';
 import Delivery from './pages/Delivery/Delivery';
-import Basket from './core/Basket';
+import Basket from '../src/components/Basket/Basket';
 import SellerDashboard from './pages/Seller/SellerDashboard';
 
 

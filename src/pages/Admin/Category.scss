@@ -12,7 +12,7 @@
         position: -webkit-sticky;
         z-index: 999;
 
-        h2 {
+        h2, h3, h4, h5 {
             color: #fff;
         }
     }
@@ -53,4 +53,18 @@
             background-color: #ddd;
         }
     }
+}
+
+.edit-btn {
+    background-color: #150485;
+    color: white;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
 }

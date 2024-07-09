@@ -37,7 +37,7 @@ const Home = () =>  {
     return (
         <Layout title="Home Page" description="Osonmarket" className="container">
             <Carousel />
-            <div className="productList"> 
+            <div className="productList p-0"> 
                 {productsByArrival.map((product, i) => (
                     <Card key={i} product={product}/> 
                 ))}

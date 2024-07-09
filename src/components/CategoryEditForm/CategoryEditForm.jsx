@@ -1,4 +1,3 @@
-import "./CategoryEditForm.scss"
 
 import Input from "../Input/Input"
 

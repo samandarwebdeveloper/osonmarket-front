@@ -12,6 +12,7 @@ const isActive = (history, path) => {
     } else {
         return {color: '#15509E', borderBottom: '2px solid transparent'};
     }
+    
 };
 
 const Header = ({ history }) => (

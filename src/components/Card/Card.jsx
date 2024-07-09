@@ -4,12 +4,25 @@ import ShowImage from '../../core/ShowImage';
 import BuyModal from '../../core/buyModal';
 import SoldModal from '../../core/soldModal';
 import './Card.scss'
+import Alert from '../Alert/Alert';
 
 
 const Card = ({product}) => {
     const [modal, setModal] = useState(false)
     const [soldModal, setSoldModal] = useState(false)
     const [buyProduct, setBuyProduct] = useState('')
+    const [alert, setAlert] = useState(false)
+    const [alertType, setAlertType] = useState("")
+    const [alertMessage, setAlertMessage] = useState("")
+
+    const alertStatus = (stype, string) => {
+        setAlert(true)
+        setAlertType(stype)
+        setAlertMessage(string)
+        setTimeout(() => {
+            setAlert(false)
+        }, 3000)
+    }  
 
     const handleBuy = (e) => { 
         setModal(true)
@@ -19,16 +32,23 @@ const Card = ({product}) => {
     // create handle add to cart
     const handleAddCard = (e) => {
         if (typeof window !== 'undefined') {
-            let cart = []
-            if (localStorage.getItem('cart')) {
-                cart = JSON.parse(localStorage.getItem('cart'))
+            let card = []
+            if (localStorage.getItem('card')) {
+                let unique = []
+                card = JSON.parse(localStorage.getItem('card'))
+                unique = card.filter(item => item._id == product._id)
+                if (unique.length) {
+                    alertStatus("error", "Mahsulot savatchada mavjud")
+                } else {
+                    card.push(product)
+                    localStorage.setItem('card', JSON.stringify(card))
+                    alertStatus("success", "Mahsulot savatchaga qo'shildi")
+                }
+            } else {
+                card.push(product)
+                localStorage.setItem('card', JSON.stringify(card))
+                alertStatus("success", "Mahsulot savatchaga qo'shildi")
             }
-            cart.push({
-                ...product,
-                count: 1
-            })
-            let unique = [...new Set(cart.map(item => item._id))]
-            localStorage.setItem('cart', JSON.stringify(unique))
         }
     }
 
@@ -53,6 +73,7 @@ const Card = ({product}) => {
                         Xarid qilish
                     </button>
             </div>
+            {alert && <Alert setAlert={setAlert} alertType={alertType} alertMessage={alertMessage} />}
             {soldModal && <SoldModal setSoldModal={setSoldModal} />}
             {modal && <BuyModal setModal={setModal} id={buyProduct} product={product} setSoldModal={setSoldModal} />}
         </div>

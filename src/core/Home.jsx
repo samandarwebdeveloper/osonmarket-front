@@ -3,11 +3,13 @@ import Layout from './Layout';
 import {getProducts} from './apiCore';
 import Card from '../components/Card/Card';
 import Carousel from './Carousel';
+import Loading from '../components/Loading/Loading';
 
 const Home = () =>  {
     const [productsBySell, setProductsBySell] = useState([]);
     const [productsByArrival, setProductsByArrival] = useState([]);
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const loadProductsBySell = () => {
         getProducts('sold').then(data => {
@@ -25,6 +27,7 @@ const Home = () =>  {
                 setError(data.error);
             } else {
                 setProductsByArrival(data);
+                setLoading(false)
             }
         });
     };
@@ -38,6 +41,7 @@ const Home = () =>  {
         <Layout title="Home Page" description="Osonmarket" className="container">
             <Carousel />
             <div className="productList p-0"> 
+                {loading && <Loading />}
                 {productsByArrival.map((product, i) => (
                     <Card key={i} product={product}/> 
                 ))}

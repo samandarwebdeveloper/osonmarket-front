@@ -62,7 +62,16 @@ const Card = ({product}) => {
                     <div>
                     <Link className="product-link" to={`/product/${product._id}`}>
                         <h6 className='mb-3'>{product.name}</h6>
-                        <p>{product.price.toString().split("").reverse().map((v,i,a) => (i<a.length-1 && i%3==0) ? v + " ":v).reverse().join("")} so'm</p>
+                        <p>{product.price.toString()
+                                        .split("")
+                                        .reverse()
+                                        .map(
+                                            (v, i, a) => (i < a.length - 1 && i % 3 == 0 || i % 6 == 0)
+                                                ? v + " "
+                                                : v
+                                        )
+                                        .reverse()
+                                        .join("")} so'm</p>
                     </Link>
                     </div>
                     <button className='card-basket-btn ml-2' onClick={handleAddCard} id={product._id}>

@@ -33,7 +33,7 @@ const Footer = () => {
                         </Link>
                     </li>
                 </ul>
-                <ul className="right-nav">
+                <ul className="right-nav mt-auto">
                             <li className="phone-link-footer">
                                 <a className='mr-2 phone-link' href='tel:+998970750757'>
                                     <i className="fa-solid fa-phone pr-1"></i>

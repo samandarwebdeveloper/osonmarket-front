@@ -3,6 +3,7 @@ import Layout from './Layout';
 import {read} from './apiCore';
 import {API} from '../config';
 import Loading from '../components/Loading/Loading';
+import Alert from '../components/Alert/Alert';
 import {
     CarouselProvider,
     Slider,
@@ -24,6 +25,19 @@ const Product = props => {
     const [buyProduct, setBuyProduct] = useState('')
     const [loading, setLoading] = useState(true)
     const [referral, setReferral] = useState('')
+    const [alert, setAlert] = useState(false)
+    const [alertType, setAlertType] = useState("")
+    const [alertMessage, setAlertMessage] = useState("")
+
+    const alertStatus = (stype, string) => {
+        setAlert(true)
+        setAlertType(stype)
+        setAlertMessage(string)
+        setTimeout(() => {
+            setAlert(false)
+        }, 3000)
+    }  
+
 
     const handleBuy = (e) => {
         setModal(true)
@@ -38,15 +52,20 @@ const Product = props => {
         if (typeof window !== 'undefined') {
             let card = []
             if (localStorage.getItem('card')) {
+                let unique = []
                 card = JSON.parse(localStorage.getItem('card'))
-            }
-            card.push({
-                ...product,
-                count: 1
-            })
-            let unique = [...card.map(item => item._id == product._id)]
-            if (unique.length) {
+                unique = card.filter(item => item._id == product._id)
+                if (unique.length) {
+                    alertStatus("error", "Mahsulot savatchada mavjud")
+                } else {
+                    card.push({...product, count: 1})
+                    localStorage.setItem('card', JSON.stringify(card))
+                    alertStatus("success", "Mahsulot savatchaga qo'shildi")
+                }
+            } else {
+                card.push({...product, count: 1})
                 localStorage.setItem('card', JSON.stringify(card))
+                alertStatus("success", "Mahsulot savatchaga qo'shildi")
             }
         }
     }
@@ -176,6 +195,7 @@ const Product = props => {
                         }}>
                         {error}
                     </div>
+                    {alert && <Alert setAlert={setAlert} alertType={alertType} alertMessage={alertMessage} />}
                     {
                         soldModal && <SoldModal setSoldModal={setSoldModal}/>
                     } {

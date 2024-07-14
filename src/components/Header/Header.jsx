@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect, useState } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {isAuthenticated} from '../../auth';
 import Search from '../Search/Search';
@@ -15,8 +15,22 @@ const isActive = (history, path) => {
     
 };
 
-const Header = ({ history }) => (
-    <div className='bg-white mb-2'> 
+
+
+const Header = ({ history }) => {
+    const [basketProductsCount, setBasketProductsCount] = useState(0)
+    const basket = localStorage.getItem('card') ? JSON.parse(localStorage.getItem('card')) : []
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            if (localStorage.getItem('card')) {
+                setBasketProductsCount(basket.length)
+            }
+        }
+    }, [basket])
+
+    return (
+        <div className='bg-white mb-2'> 
         <div className="main-color">
             <ul className="container nav mt-auto d-flex align-items-center p-2 pr-3 pl-3">
                     <li className='nav-item mr-auto'>
@@ -38,7 +52,7 @@ const Header = ({ history }) => (
                     </li>
             </ul>
         </div>
-        <ul className="nav container mt-auto d-flex align-items-center header-nav p-2 pr-3 pl-3 pt-3">
+        <ul className="nav container mt-auto d-flex align-items-center header-nav p-3">
             <li className="nav-item d-flex align-items-center mr-5 logo">
                 <Link to="/"><img src={logo} alt='logo' width={'140'} className='logo-img' /></Link>
             </li>
@@ -51,16 +65,18 @@ const Header = ({ history }) => (
             <li className="nav-item ml-3 mr-auto search-list">
                 <Search />
             </li>
-            <li className='nav-item mr-2 d-flex align-items-center shop-icon-list'>
-                <Link className="m-2 link-unstyled" to="/basket">
-                    <i className="fa-solid fa-cart-shopping header-icon"></i>
+            <li className='nav-item d-flex align-items-center shop-icon-list'>
+                <Link className="link-unstyled shop-link" to="/basket">
+                    <i className="fa-solid fa-cart-shopping header-icon shop-icon">
+                        <span className='basket-count'>{basketProductsCount}</span>
+                    </i>
                     <span className='header-icon-text'>Savat</span>
                 </Link>
             </li>
             {isAuthenticated() && isAuthenticated().user.role === undefined && (
                 <li className="nav-item d-flex align-items-center">
                     <Link className="m-2 link-unstyled" style={isActive(history, '/seller')} to="/seller">
-                    <i className="fa-regular fa-user"></i>
+                    <i className="fa-solid fa-user"></i>
                     </Link>
                 </li>
             )}
@@ -68,7 +84,7 @@ const Header = ({ history }) => (
             {isAuthenticated() && isAuthenticated().user.role === 1 && (
                 <li className="nav-item d-flex align-items-center">
                     <Link className="m-2 link-unstyled" style={isActive(history, '/admin')} to="/admin">
-                    <i className="fa-regular fa-user"></i>
+                    <i className="fa-solid fa-user"></i>
                     </Link>
                 </li>
             )}
@@ -76,8 +92,8 @@ const Header = ({ history }) => (
             {!isAuthenticated() && (
                 <Fragment>
                     <li className="nav-item d-flex align-items-center">
-                        <Link className="link-unstyled" style={isActive(history, '/signin')} to="/signin"> 
-                        <i className="fa-regular fa-user header-icon"></i>
+                        <Link className="link-unstyled header-login-link" style={isActive(history, '/signin')} to="/signin"> 
+                        <i className="fa-solid fa-user header-icon"></i>
                         <span className='header-icon-text'>Kirish</span>
                         </Link>
                     </li>
@@ -86,6 +102,6 @@ const Header = ({ history }) => (
 
         </ul>
     </div>
-);
+)};
 
-export default withRouter(Header);
+export default withRouter(Header)

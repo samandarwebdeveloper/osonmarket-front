@@ -112,6 +112,23 @@ export const order = (id, emaunt, price, name, tel, marketId, referral) => {
     });
 }
 
+export const createMultipleOrder = (data) => {
+    return fetch(`${API}/order/multiple`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
 export const getUsers = () => {
     return fetch(`${API}/users`, {
         method: 'GET'

@@ -40,12 +40,12 @@ const Card = ({product}) => {
                 if (unique.length) {
                     alertStatus("error", "Mahsulot savatchada mavjud")
                 } else {
-                    card.push(product)
+                    card.push({...product, count: 1})
                     localStorage.setItem('card', JSON.stringify(card))
                     alertStatus("success", "Mahsulot savatchaga qo'shildi")
                 }
             } else {
-                card.push(product)
+                card.push({...product, count: 1})
                 localStorage.setItem('card', JSON.stringify(card))
                 alertStatus("success", "Mahsulot savatchaga qo'shildi")
             }

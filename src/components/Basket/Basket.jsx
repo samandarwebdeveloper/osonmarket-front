@@ -1,6 +1,7 @@
 import Layout from '../../core/Layout'
 import { useState, useEffect } from 'react'
 import { API, URL } from '../../config'
+import { createMultipleOrder } from '../../core/apiCore'
 import './Basket.scss'
 
 function Basket () {
@@ -17,8 +18,8 @@ function Basket () {
 
     useEffect(() => {
         let sum = 0
-        basket.map(item => {
-            sum += item.price
+        basket.forEach(item => {
+            sum += item.price * item.count
         })
         setTotal(sum)
     }, [basket])
@@ -37,6 +38,26 @@ function Basket () {
             setBasket(cart)
         }
     }
+
+    const handleChangeProductCount = (id, count) => {
+        let cart = []
+        if (typeof window !== 'undefined') {
+            if (localStorage.getItem('card')) {
+                cart = JSON.parse(localStorage.getItem('card'))
+            }
+            cart = cart.map(item => {
+                if(item._id === id) {
+                    if(count > 0) {
+                        item.count = count
+                    }
+                }
+                return item
+            })
+            localStorage.setItem('card', JSON.stringify(cart))
+            setBasket(cart)
+        }
+    }
+
     return (
         <Layout>
             <div className='container py-2'>
@@ -66,9 +87,9 @@ function Basket () {
                                         <i className="fa-solid fa-trash"></i>
                                     </button>
                                     <div className='buttons'>
-                                        <button className='basket-item-minus'>-</button>
-                                        <p className='basket-item-quantity'>1</p>
-                                        <button className='basket-item-plus'>+</button>
+                                        <button className='basket-item-minus' onClick={() => handleChangeProductCount(item._id, item.count - 1)}>-</button>
+                                        <p className='basket-item-quantity'>{item.count}</p>
+                                        <button className='basket-item-plus' onClick={() => handleChangeProductCount(item._id, item.count + 1)}>+</button>
                                     </div>
                                 </div>
                             </div>

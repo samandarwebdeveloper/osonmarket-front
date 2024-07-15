@@ -83,7 +83,7 @@ function Ref() {
                                 <a href={`${URL}product/${referral.productId._id}?ref=${referral._id}`} target="_blank" rel="noreferrer">
                                     <i className="fa-solid fa-link"></i>
                                 </a>
-                                <button className="copy-btn" onClick={() => copyRefUrl(`http://localhost:5173/product/${referral.productId._id}?ref=${referral._id}`)}>
+                                <button className="copy-btn" onClick={() => copyRefUrl(`${URL}/product/${referral.productId._id}?ref=${referral._id}`)}>
                                     <i className="fa-solid fa-copy"></i>
                                 </button>
                             </div>

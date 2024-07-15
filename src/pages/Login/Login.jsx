@@ -22,10 +22,8 @@ function Login() {
 
     const clickSubmit = event => {
         let role = 'user'
-        if (phone === '+998915118089') {
+        if (phone === '+998915118089' || phone === '+998915175272') {
             role = 'admin'
-        } else if (phone === '+998915175272') {
-            role = 'user'
         }
         if (phone.split('').length !== 13) {
             return setValues({...values, error: 'Telefon raqamni tekshirib qaytadan kiriting!'})

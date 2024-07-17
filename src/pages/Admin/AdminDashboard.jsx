@@ -8,6 +8,7 @@ import Markets from './Markets';
 import Order from './Order';
 import {withRouter} from 'react-router-dom';
 import AdminProfit from './AdminProfit';
+import Stats from './Stats';
 import "./Admin.scss"
 
 
@@ -23,6 +24,7 @@ const AdminDashboard = ({history}) => {
                 <Route path="/admin/sellers" component={Seller}/>
                 <Route path="/admin/markets" component={Markets}/>
                 <Route path="/admin/profit" component={AdminProfit}/>
+                <Route path="/admin/stats" component={Stats}/>
             </Switch>
             </div> 
         </div>

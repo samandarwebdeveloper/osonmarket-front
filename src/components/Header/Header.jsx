@@ -17,9 +17,8 @@ const isActive = (history, path) => {
 
 
 
-const Header = ({ history }) => {
+const Header = ({ history, basket }) => {
     const [basketProductsCount, setBasketProductsCount] = useState(0)
-    const basket = localStorage.getItem('card') ? JSON.parse(localStorage.getItem('card')) : []
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
